@@ -19,6 +19,7 @@ Write-Host ""
 Write-Host $line
 while ($Insert_Test) {
     $Client_port = Read-Host -Prompt "Enter provided client port "
+    $Client_IP = Read-Host -Prompt "Enter provided client IP Address "
     $Enrollment_port = Read-Host -Prompt "Enter provided enrollment port "
     $Agent_name = Read-Host -Prompt "Enter name for Wazuh Agent "
     $Wazuh_Agent_Group = Read-Host -Prompt "Enter name for Wazuh Agent "
@@ -33,9 +34,9 @@ while ($Insert_Test) {
 Write-Host $line
 $content = Get-Content -Path "C:\Program Files (x86)\ossec-agent\ossec.conf"
 
-$content[10] = "      <address>178.218.246.60</address>"
+$content[10] = "      <address>$Client_IP</address>"
 $content[11] = "      <port>$Client_port</port>"
-$content[21] = "        <manager_address>178.218.246.60</manager_address>`n        <port>$Enrollment_port</port>"
+$content[21] = "        <manager_address>$Client_IP</manager_address>`n        <port>$Enrollment_port</port>"
 $content[22] = "        <agent_name>$Agent_name</agent_name>"
 $content[23] = "        <groups>$Wazuh_Agent_Group</groups>"
 
